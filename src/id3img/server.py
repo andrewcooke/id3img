@@ -2,10 +2,58 @@
 from argparse import ArgumentParser
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from logging import basicConfig, getLogger
+from mimetypes import guess_type
+from os import listdir
 from urllib.parse import unquote
 from os.path import join
 
 from stagger import read_tag
+
+
+def find_image(root, path):
+    '''
+    Find a suitable image and return (mime type, binary data).  We try to make
+    everyone happy by including:
+    - the exact file requested (folder.jog by default)
+    - any ID3 picture from an mp3 file in that directory
+    - the same as above, but with the artist name (first path element)
+      replaced by "Various"
+    '''
+    artist, rest = path.split('/')
+    album, file = rest.rsplit('/')
+    for name in artist, 'Various':
+        dir = join(root, name, album)
+        for mime, data in exact_file(dir, file): return mime, data
+        for mime, data in id3_picture(dir): return mime, data
+
+
+def exact_file(dir, file):
+    LOG = getLogger('exact_file')
+    path = join(dir, file)
+    try:
+        LOG.debug('trying %s' % path)
+        with open(path, 'rb') as input:
+            LOG.info('found %s' % path)
+            yield guess_type(file), input.readall()
+    except KeyboardInterrupt: raise
+    except Exception as e: LOG.debug(e)
+
+
+def id3_picture(dir):
+    LOG = getLogger('id3_picture')
+    try:
+        for file in listdir(dir):
+            if file.endswith('.mp3'):
+                LOG.debug('trying %s' % file)
+                tag = read_tag(join(dir, file))
+                for key in 'PIC', 'APIC':
+                    if key in tag:
+                        LOG.info('found %s' % file)
+                        pic = tag[key][0]
+                        yield pic.mime, pic.data
+    except KeyboardInterrupt: raise
+    except Exception as e: LOG.debug(e)
+
 
 
 def handler(root):
@@ -17,21 +65,16 @@ def handler(root):
         def do_GET(self):
             LOG.debug('request: %s' % self.path)
             try:
-                tag = read_tag(join(root, unquote(self.path[1:])))
-                for key in 'PIC', 'APIC':
-                    if key in tag: return self.image(tag[key][0])
-                raise Exception('No image found')
+                for mime, data in find_image(root, unquote(self.path[1:])):
+                    self.send_response(200)
+                    self.send_header('Content-type', mime)
+                    self.end_headers()
+                    self.wfile.write(data)
+                    return
             except KeyboardInterrupt: raise
             except Exception as e:
                 LOG.debug(e)
                 self.send_error(404, '%s not found' % self.path)
-
-        def image(self, tag):
-            LOG.debug(tag)
-            self.send_response(200)
-            self.send_header('Content-type', tag.mime)
-            self.end_headers()
-            self.wfile.write(tag.data)
 
     return ImageHandler
 
