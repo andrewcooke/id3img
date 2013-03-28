@@ -29,6 +29,12 @@ from a "web server" - `id3img` provides a suitable web server.
     as above (ID3 image), but maybe the album is a collection from various
     artists.
 
+In the examples above, `/root` is the path that you give to the `id3img` server
+on the command line when you start the program (see below).  The values of
+`artist` and `album` are taken from the music that is being played.
+An alternative for `folder.jpg` can be set in the
+[MPDroid](https://github.com/abarisain/dmix) settings.
+
 Limitations
 -----------
 
