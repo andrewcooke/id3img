@@ -46,7 +46,7 @@ Installation
 
   0. Make sure that you have Python 3 (tested with Python 3.3) available.
 
-  1. Check out this git repo.
+  1. Clone this git repo.
 
   2. If you want, you can use the `setupenv.sh` script to create a
      virtualenv environment.  Alternatively, make sure that you have the
