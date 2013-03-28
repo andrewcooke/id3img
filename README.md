@@ -48,7 +48,7 @@ Installation
 
   1. Clone this git repo.
 
-  2. If you want, you can use the `setupenv.sh` script to create a
+  2. If you want, you can use the `setup-env.sh` script to create a
      virtualenv environment.  Alternatively, make sure that you have the
      [Stagger](https://code.google.com/p/stagger/) library installed
      (perhaps by doing `sudo easy_install stagger`).
