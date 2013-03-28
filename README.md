@@ -41,7 +41,34 @@ Python 2 - come on, it's 2013 already).
 Everything assumes that the music is grouped in directories by artist name
 and then album name.
 
+Installation
+------------
 
+  0. Make sure that you have Python 3 (tested with Python 3.3) available.
+
+  1. Check out this git repo.
+
+  2. If you want, you can use the `setupenv.sh` script to create a
+     virtualenv environment.  Alternatively, make sure that you have the
+     [Stagger](https://code.google.com/p/stagger/) library installed
+     (perhaps by doing `sudo easy_install stagger`).
+
+  3. Run the server.  For example,
+
+     `python3.3 src/id3img/server.py /music/mp3`
+
+     For help on options, see `python3.3 src/id3img/server.py -h`.
+
+  4. Configure [MPDroid](https://github.com/abarisain/dmix).  You will
+     likely want to change the "path to music" to be something like
+     `http://your.machine:6601/`.
+
+Debugging
+---------
+
+You can enable debug information with:
+
+`python3.3 src/id3img/server.py -l DEBUG /path/to.music`
 
 Licence
 -------
