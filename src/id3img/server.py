@@ -19,8 +19,8 @@ def find_image(root, path):
     - the same as above, but with the artist name (first path element)
       replaced by "Various"
     '''
-    artist, rest = path.split('/')
-    album, file = rest.rsplit('/')
+    artist, rest = path.split('/', 1)
+    album, file = rest.rsplit('/', 1)
     for name in artist, 'Various':
         dir = join(root, name, album)
         for mime, data in exact_file(dir, file): yield mime, data
@@ -36,7 +36,7 @@ def exact_file(dir, file):
             LOG.info('found %s' % path)
             yield guess_type(file), input.readall()
     except KeyboardInterrupt: raise
-    except Exception as e: LOG.debug(e)
+    except Exception as e: LOG.error(e)
 
 
 def id3_picture(dir):
@@ -52,7 +52,7 @@ def id3_picture(dir):
                         pic = tag[key][0]
                         yield pic.mime, pic.data
     except KeyboardInterrupt: raise
-    except Exception as e: LOG.debug(e)
+    except Exception as e: LOG.error(e)
 
 
 
@@ -73,7 +73,7 @@ def handler(root):
                     return
             except KeyboardInterrupt: raise
             except Exception as e:
-                LOG.debug(e)
+                LOG.error(e)
                 self.send_error(404, '%s not found' % self.path)
 
     return ImageHandler
