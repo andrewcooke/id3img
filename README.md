@@ -42,8 +42,8 @@ Everything assumes that the music is grouped in directories by artist name
 and then album name.
 
 **IMPORTANT** - this program provides access to files on your computer.
-A user can request any file, by giving the appropriate path.  So you should
-only use it on a local network where you trust other users.
+A remote user can request any file, by giving the appropriate path.  So you
+should only use it on a local network where you trust other users.
 (In theory, only files below the "root" directory are available, but there
 may be bugs in the code.)
 
