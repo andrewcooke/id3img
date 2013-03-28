@@ -8,6 +8,45 @@ album art for your music.
 By default, [MPDroid](https://github.com/abarisain/dmix) will pull images
 from [Last.fm](http://last.fm), which is OK, but doesn't always get exactly
 the right image.  So there is an alternative configuration (see
-"Download local cover art") that allows you to pull images from a "web server".
-`id3img` provides a suitable web server.
+"Download local cover art" in the settings) that allows you to pull images
+from a "web server" - `id3img` provides a suitable web server.
+
+`id3img` provides images from four different sources:
+
+  * from `/root/artist/album/folder.jpg` - this assumes that each album
+    directory contains an image with a fixed name (by default `folder.jpg`,
+    but you can change it in [MPDroid](https://github.com/abarisain/dmix)'s
+    settings).
+
+  * from an ID3 `PIC` or `APIC` tag in any `/root/artist/album/*.mp3` -
+    so if any mp3 in that directory contains an image in the ID3 data,
+    then that image will be used.
+
+  * from `/root/Various/album/folder.jpg` - as above (fixed name file), but
+    maybe the album is a collection from various artists.
+
+  * from an ID3 `PIC` or `APIC` tag in any `/root/Various/album/*.mp3` -
+    as above (ID3 image), but maybe the album is a collection from various
+    artists.
+
+Limitations
+-----------
+
+This is Python code, not packaged in anyway, so you need to be able to install
+Python software from Github and be comfortable with getting it running.
+
+It has been tested only on Linux, with Python 3.3 (it will not work with
+Python 2 - come on, it's 2013 already).
+
+Everything assumes that the music is grouped in directories by artist name
+and then album name.
+
+
+
+Licence
+-------
+
+Code is (c) Andrew Cooke 2013, but released into the public domain with
+absolutely no warranty.  So you can do what you like with it.  Just don't
+sue me.
 
