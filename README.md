@@ -79,7 +79,7 @@ Installation
 Debugging
 ---------
 
-You can enable debug information with:
+You can enable debug logging (to stderr) with:
 
 `python3.3 src/id3img/server.py -l DEBUG /path/to/music`
 
