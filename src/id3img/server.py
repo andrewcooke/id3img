@@ -34,7 +34,7 @@ def exact_file(dir, file):
         LOG.debug('trying %s' % path)
         with open(path, 'rb') as input:
             LOG.info('found %s' % path)
-            yield guess_type(file), input.readall()
+            yield guess_type(file), input.read()
     except KeyboardInterrupt: raise
     except Exception as e: LOG.error(e)
 
@@ -59,7 +59,6 @@ def id3_picture(dir):
                         yield pic.mime, pic.data
     except KeyboardInterrupt: raise
     except Exception as e: LOG.error(e)
-
 
 
 def handler(root):
