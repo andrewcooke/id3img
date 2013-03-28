@@ -44,8 +44,9 @@ and then album name.
 **IMPORTANT** - this program provides access to files on your computer.
 A remote user can request any file, by giving the appropriate path.  So you
 should only use it on a local network where you trust other users.
-(In theory, only files below the "root" directory are available, but there
-may be bugs in the code.)
+(In theory, only files below the directory containing music - the path given
+on the command line at startup - are available, but there may be bugs in the
+code.)
 
 Installation
 ------------
