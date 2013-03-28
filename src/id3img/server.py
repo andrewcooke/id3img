@@ -22,14 +22,14 @@ def find_image(root, path):
     artist, rest = path.split('/', 1)
     album, file = rest.rsplit('/', 1)
     for name in artist, 'Various':
-        dir = join(root, name, album)
+        dir = safejoin(root, name, album)
         for mime, data in exact_file(dir, file): yield mime, data
         for mime, data in id3_picture(dir): yield mime, data
 
 
 def exact_file(dir, file):
     LOG = getLogger('exact_file')
-    path = join(dir, file)
+    path = safejoin(dir, file)
     try:
         LOG.debug('trying %s' % path)
         with open(path, 'rb') as input:
@@ -39,13 +39,19 @@ def exact_file(dir, file):
     except Exception as e: LOG.error(e)
 
 
+def safejoin(*paths):
+    path = join(*paths)
+    if path.startswith(paths[0]): return path
+    raise Exception('Path shifted from root: %s' % path)
+
+
 def id3_picture(dir):
     LOG = getLogger('id3_picture')
     try:
         for file in listdir(dir):
             if file.endswith('.mp3'):
                 LOG.debug('trying %s' % file)
-                tag = read_tag(join(dir, file))
+                tag = read_tag(safejoin(dir, file))
                 for key in 'PIC', 'APIC':
                     if key in tag:
                         LOG.info('found %s' % file)
