@@ -23,8 +23,8 @@ def find_image(root, path):
     album, file = rest.rsplit('/')
     for name in artist, 'Various':
         dir = join(root, name, album)
-        for mime, data in exact_file(dir, file): return mime, data
-        for mime, data in id3_picture(dir): return mime, data
+        for mime, data in exact_file(dir, file): yield mime, data
+        for mime, data in id3_picture(dir): yield mime, data
 
 
 def exact_file(dir, file):
