@@ -68,7 +68,7 @@ Debugging
 
 You can enable debug information with:
 
-`python3.3 src/id3img/server.py -l DEBUG /path/to.music`
+`python3.3 src/id3img/server.py -l DEBUG /path/to/music`
 
 Don't forget to open port 6601 (or whatever value you configure with `-p`)
 in your firewall.
