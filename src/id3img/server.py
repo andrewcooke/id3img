@@ -68,6 +68,8 @@ def handler(root):
     class ImageHandler(BaseHTTPRequestHandler):
 
         def do_GET(self):
+            # somewhat odd structure here - using generators as "options"
+            # (empty / something) and returning on success
             LOG.debug('request: %s' % self.path)
             try:
                 for mime, data in find_image(root, unquote(self.path[1:])):
@@ -77,9 +79,8 @@ def handler(root):
                     self.wfile.write(data)
                     return
             except KeyboardInterrupt: raise
-            except Exception as e:
-                LOG.error(e)
-                self.send_error(404, '%s not found' % self.path)
+            except Exception as e: LOG.error(e)
+            self.send_error(404, '%s not found' % self.path)
 
     return ImageHandler
 

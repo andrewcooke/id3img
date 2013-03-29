@@ -64,7 +64,7 @@ Installation
   2. If you want, you can use the `setup-env.sh` script to create a
      virtualenv environment.  Alternatively, make sure that you have the
      [Stagger](https://code.google.com/p/stagger/) library installed
-     (perhaps by doing `sudo easy_install stagger`).
+     (perhaps by doing `sudo easy_install-3.3 stagger`).
 
   3. Run the server.  For example,
 
