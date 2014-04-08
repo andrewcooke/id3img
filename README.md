@@ -62,9 +62,7 @@ Installation
   1. Clone this git repo.
 
   2. If you want, you can use the `setup-env.sh` script to create a
-     virtualenv environment.  Alternatively, make sure that you have the
-     [Stagger](https://code.google.com/p/stagger/) library installed
-     (perhaps by doing `sudo easy_install-3.3 stagger`).
+     virtualenv environment.
 
   3. Run the server.  For example,
 
@@ -92,4 +90,12 @@ Licence
 Code is (c) Andrew Cooke 2013, but released into the public domain with
 absolutely no warranty.  So you can do what you like with it.  Just don't
 sue me.
+
+Stagger
+-------
+
+This software includes a copy of [Stagger](https://code.google.com/p/stagger)
+which appears to be no longer maintained, and does not install.  The copyright
+remains with the initial author, Karoly Lorentey.  See LICENCE file in the
+stagger directory.
 
