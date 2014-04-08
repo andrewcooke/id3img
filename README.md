@@ -66,7 +66,7 @@ Installation
 
   3. Run the server.  For example,
 
-     `python3.3 src/id3img/server.py /music/mp3`
+     `PYTHONPATH=src python3.3 src/id3img/server.py /music/mp3`
 
      For help on options, see `python3.3 src/id3img/server.py -h`.
 
