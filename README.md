@@ -41,7 +41,7 @@ Limitations
 This is Python code, not packaged in anyway, so you need to be able to install
 Python software from Github and be comfortable with getting it running.
 
-It has been tested only on Linux, with Python 3.3 (it will not work with
+It has been tested only on Linux, with Python 3 (it will not work with
 Python 2 - come on, it's 2013 already).
 
 Everything assumes that the music is grouped in directories by artist name
@@ -57,7 +57,8 @@ code.)
 Installation
 ------------
 
-  0. Make sure that you have Python 3 (tested with Python 3.3) available.
+  0. Make sure that you have Python 3 (tested with Python 3)
+     available.
 
   1. Clone this git repo.
 
@@ -66,9 +67,9 @@ Installation
 
   3. Run the server.  For example,
 
-     `PYTHONPATH=src python3.3 src/id3img/server.py /music/mp3`
+     `PYTHONPATH=src python3 src/id3img/server.py /music/mp3`
 
-     For help on options, see `python3.3 src/id3img/server.py -h`.
+     For help on options, see `python3 src/id3img/server.py -h`.
 
   4. Configure [MPDroid](https://github.com/abarisain/dmix).  You will
      likely want to change the "path to music" to be something like
@@ -79,7 +80,7 @@ Debugging
 
 You can enable debug logging (to stderr) with:
 
-`python3.3 src/id3img/server.py -l DEBUG /path/to/music`
+`PYTHONPATH=src python3 src/id3img/server.py -l DEBUG /path/to/music`
 
 Don't forget to open port 6601 (or whatever value you configure with `-p`)
 in your firewall.
